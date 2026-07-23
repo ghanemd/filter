@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     // Define allowable filters
-    char *filters = "bgrs";
+    char *filters = "bgrse";
 
     // Get filter flag and check validity
     char filter = getopt(argc, argv, filters);
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
     int width = bi.biWidth;
 
     // Allocate memory for image
-    RGBTRIPLE(*image)[width] = calloc(height, width * sizeof(RGBTRIPLE));
+    RGBTRIPLE(*image)[width] = calloc(height, width * sizeof(RGBTRIPLE));  //RGBTRIPLE image[height][width]
     if (image == NULL)
     {
         printf("Not enough memory to store image.\n");
