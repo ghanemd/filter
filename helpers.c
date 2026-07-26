@@ -85,14 +85,17 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     total_red += copy[i-1][j-1].rgbtRed;
                     total_green += copy[i-1][j-1].rgbtGreen;
                     total_blue += copy[i-1][j-1].rgbtBlue;
+                    number_neighbors++;
                 }
                 total_red += copy[i-1][j].rgbtRed;
                 total_green += copy[i-1][j].rgbtGreen;
                 total_blue += copy[i-1][j].rgbtBlue;
+                number_neighbors++;
                 if(j < width - 1){
                     total_red += copy[i-1][j+1].rgbtRed;
                     total_green += copy[i-1][j+1].rgbtGreen;
                     total_blue += copy[i-1][j+1].rgbtBlue;
+                    number_neighbors++;
                 }
             }
 
@@ -100,14 +103,17 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 total_red += copy[i][j-1].rgbtRed;
                 total_green += copy[i][j-1].rgbtGreen;
                 total_blue += copy[i][j-1].rgbtBlue;
+                number_neighbors++;
             }
             total_red += copy[i][j].rgbtRed;
             total_green += copy[i][j].rgbtGreen;
             total_blue += copy[i][j].rgbtBlue;
+            number_neighbors++;
             if(j < width - 1){
                 total_red += copy[i][j+1].rgbtRed;
                 total_green += copy[i][j+1].rgbtGreen;
                 total_blue += copy[i][j+1].rgbtBlue;
+                number_neighbors++;
             }
 
             if(i < height - 1){
@@ -115,14 +121,17 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     total_red += copy[i+1][j-1].rgbtRed;
                     total_green += copy[i+1][j-1].rgbtGreen;
                     total_blue += copy[i+1][j-1].rgbtBlue;
+                    number_neighbors++;
                 }
                 total_red += copy[i+1][j].rgbtRed;
                 total_green += copy[i+1][j].rgbtGreen;
                 total_blue += copy[i+1][j].rgbtBlue;
+                number_neighbors++;
                 if(j < width - 1){
                     total_red += copy[i+1][j+1].rgbtRed;
                     total_green += copy[i+1][j+1].rgbtGreen;
                     total_blue += copy[i+1][j+1].rgbtBlue;
+                    number_neighbors++;
                 }
             }
 
