@@ -150,6 +150,10 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     int gx_green[height][width];
     int gx_blue[height][width];
 
+    memset(gx_red, 0, sizeof(gx_red));
+    memset(gx_green, 0, sizeof(gx_green));
+    memset(gx_blue, 0, sizeof(gx_blue));
+
     for(int i = 0; i < height; i++)
     {
         for(int j = 0; j < width; j++)
@@ -201,6 +205,10 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     int gy_red[height][width];
     int gy_green[height][width];
     int gy_blue[height][width];
+
+    memset(gy_red, 0, sizeof(gy_red));
+    memset(gy_green, 0, sizeof(gy_green));
+    memset(gy_blue, 0, sizeof(gy_blue));
 
     for(int i = 0; i < height; i++)
     {
@@ -256,9 +264,9 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     {
         for(int j = 0; j < width; j++)
         {
-            g_red = gx_red[i][j] * gx_red[i][j] + gy_red[i][j] * gy_red[i][j];
-            g_green = gx_green[i][j] * gx_green[i][j] + gy_green[i][j] * gy_green[i][j];
-            g_blue = gx_blue[i][j] * gx_blue[i][j] + gy_blue[i][j] * gy_blue[i][j];
+            g_red = round(sqrt(gx_red[i][j] * gx_red[i][j] + gy_red[i][j] * gy_red[i][j]));
+            g_green = round(sqrt(gx_green[i][j] * gx_green[i][j] + gy_green[i][j] * gy_green[i][j]));
+            g_blue = round(sqrt(gx_blue[i][j] * gx_blue[i][j] + gy_blue[i][j] * gy_blue[i][j]));
             if(g_red > 255) {image[i][j].rgbtRed = 255;} else {image[i][j].rgbtRed = g_red;}
             if(g_green > 255) {image[i][j].rgbtGreen = 255;} else {image[i][j].rgbtGreen = g_green;}
             if(g_blue > 255) {image[i][j].rgbtBlue = 255;} else {image[i][j].rgbtBlue = g_blue;}
