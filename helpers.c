@@ -57,7 +57,80 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    return;
+    // Create a copy of image
+    RGBTRIPLE copy[height][width];
+    for(int i = 0; i < height; i++)
+    {
+        for(int j = 0; j < width; j++)
+        {
+            copy[i][j] = image[i][j];
+        }
+    }
+    // Implement the algorithm
+    int number_neighbors;
+    int total_red;
+    int total_green;
+    int total_blue;
+    for(int i = 0; i < height; i++)
+    {
+        for(int j = 0; j < width; j++)
+        {
+            number_neighbors = 0;
+            total_red = 0;
+            total_green = 0;
+            total_blue = 0;
+
+            if(i > 0){
+                if(j > 0){
+                    total_red += copy[i-1][j-1].rgbtRed;
+                    total_green += copy[i-1][j-1].rgbtGreen;
+                    total_blue += copy[i-1][j-1].rgbtBlue;
+                }
+                total_red += copy[i-1][j].rgbtRed;
+                total_green += copy[i-1][j].rgbtGreen;
+                total_blue += copy[i-1][j].rgbtBlue;
+                if(j < width - 1){
+                    total_red += copy[i-1][j+1].rgbtRed;
+                    total_green += copy[i-1][j+1].rgbtGreen;
+                    total_blue += copy[i-1][j+1].rgbtBlue;
+                }
+            }
+
+            if(j > 0){
+                total_red += copy[i][j-1].rgbtRed;
+                total_green += copy[i][j-1].rgbtGreen;
+                total_blue += copy[i][j-1].rgbtBlue;
+            }
+            total_red += copy[i][j].rgbtRed;
+            total_green += copy[i][j].rgbtGreen;
+            total_blue += copy[i][j].rgbtBlue;
+            if(j < width - 1){
+                total_red += copy[i][j+1].rgbtRed;
+                total_green += copy[i][j+1].rgbtGreen;
+                total_blue += copy[i][j+1].rgbtBlue;
+            }
+
+            if(i < height - 1){
+                if(j > 0){
+                    total_red += copy[i+1][j-1].rgbtRed;
+                    total_green += copy[i+1][j-1].rgbtGreen;
+                    total_blue += copy[i+1][j-1].rgbtBlue;
+                }
+                total_red += copy[i+1][j].rgbtRed;
+                total_green += copy[i+1][j].rgbtGreen;
+                total_blue += copy[i+1][j].rgbtBlue;
+                if(j < width - 1){
+                    total_red += copy[i+1][j+1].rgbtRed;
+                    total_green += copy[i+1][j+1].rgbtGreen;
+                    total_blue += copy[i+1][j+1].rgbtBlue;
+                }
+            }
+
+            image[i][j].rgbtBlue = round(total_blue / (float) number_neighbors);
+            image[i][j].rgbtGreen = round(total_green / (float) number_neighbors);
+            image[i][j].rgbtRed = round(total_red / (float) number_neighbors);
+        }
+    }
 }
 
 // Detect edges
